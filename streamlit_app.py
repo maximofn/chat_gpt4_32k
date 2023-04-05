@@ -4,7 +4,18 @@ import subprocess
 import platform
 import re
 import os
-import openai
+
+import subprocess
+
+def install_package(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+try:
+    import openai
+except ImportError:
+    install_package("openai")
+    import openai
+
 import streamlit as st
 
 def main():
