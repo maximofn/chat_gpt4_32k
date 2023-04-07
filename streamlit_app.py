@@ -1,21 +1,6 @@
 #!/usr/bin/env python3
-import subprocess
-
-def install_package(package):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-
-try:
-    from streamlit_chat import message
-except ImportError:
-    install_package("streamlit-chat")
-    from streamlit_chat import message
-try:
-    import openai
-except ImportError:
-    install_package("openai")
-    import openai
-
-import sys
+from streamlit_chat import message
+import openai
 import os
 import streamlit as st
 
