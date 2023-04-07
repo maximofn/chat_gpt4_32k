@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import sys
 import subprocess
-from streamlit_chat import message
 import os
 import subprocess
 
@@ -13,6 +12,11 @@ try:
 except ImportError:
     install_package("openai")
     import openai
+try:
+    from streamlit_chat import message
+except ImportError:
+    install_package("streamlit-chat")
+    from streamlit_chat import message
 
 import streamlit as st
 
