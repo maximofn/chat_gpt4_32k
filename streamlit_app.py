@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import sys
-import subprocess
 import os
 import subprocess
 
@@ -20,7 +19,7 @@ except ImportError:
 
 import streamlit as st
 
-MODELS = ["gpt-3.5-turbo", "gpt-4"]
+MODELS = ["gpt-4", "gpt-3.5-turbo"]
 
 # if total_tokens.txt exists, read it, otherwise create it
 if os.path.exists("total_tokens.txt"):
@@ -65,7 +64,12 @@ def main():
         st.session_state['past'] = []
 
     # Lateral bar
-    openai_api_key = st.sidebar.text_input("Add your OpenAI API key here:", type="password")
+    if os.path.exists("api_key.txt"):
+        with open("api_key.txt", "r") as f:
+            api_key = f.read()
+            openai_api_key = st.sidebar.text_input("Add your OpenAI API key here:", type="password", value=f"{api_key}")
+    else:
+        openai_api_key = st.sidebar.text_input("Add your OpenAI API key here:", type="password")
     selected_model = st.sidebar.selectbox("Select a model:", MODELS)
     global total_tokens
     total_tokens_used = st.sidebar.info(f"Total tokens used: {total_tokens}")
