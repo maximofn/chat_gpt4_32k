@@ -1,22 +1,22 @@
 #!/usr/bin/env python3
-import sys
-import os
 import subprocess
 
 def install_package(package):
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
 try:
-    import openai
-except ImportError:
-    install_package("openai")
-    import openai
-try:
     from streamlit_chat import message
 except ImportError:
     install_package("streamlit-chat")
     from streamlit_chat import message
+try:
+    import openai
+except ImportError:
+    install_package("openai")
+    import openai
 
+import sys
+import os
 import streamlit as st
 
 MODELS = ["gpt-4", "gpt-3.5-turbo"]
